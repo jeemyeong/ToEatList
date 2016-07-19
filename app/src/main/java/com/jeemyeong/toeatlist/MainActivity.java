@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     ImageView imageView;
     Button button;
     private ServerInterface api;
-
+    List<Food> foodList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //take ServerInterface
         AppController.getInstance().buildServerInterface(ip,port);
         api = AppController.getInstance().getServerInterface();
-        
+
 
 //        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 //        StrictMode.setThreadPolicy(policy);
@@ -51,11 +51,35 @@ public class MainActivity extends Activity implements View.OnClickListener{
         imageView = (ImageView) findViewById(R.id.imageView);
         button = (Button) findViewById(R.id.button);
 
-        String url = "https://jeemyeongrails.s3.amazonaws.com/uploads/food/image_file/1/2_sannakji.PNG";
-        Glide.with(this).load(url).into(imageView);
-        imageView.setVisibility(View.VISIBLE);
-        String json = "[{\"id\":1,\"name\":\"찜닭\",\"category\":\"일식\",\"description\":\"맛난다\",\"restaurant\":\"토끼정\",\"loca_simple\":\"강남\",\"loca_map\":\"강남\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/1/tokkijung.png\"}},\"url\":\"http://52.78.99.238/foods/1.json\"},{\"id\":2,\"name\":\"에그베네딕트\",\"category\":\"양식\",\"description\":\"맛\",\"restaurant\":\"르브런쉭\",\"loca_simple\":\"여의도\",\"loca_map\":\"여의도\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/2/lebrun.PNG\"}},\"url\":\"http://52.78.99.238/foods/2.json\"}]";
-        List<Food> foodList = Food.getListFromJSonObject(json);
+        imageButton1.setOnClickListener(this);
+        imageButton2.setOnClickListener(this);
+        imageView.setOnClickListener(this);
+        button.setOnClickListener(this);
+
+//        String url = "https://jeemyeongrails.s3.amazonaws.com/uploads/food/image_file/1/2_sannakji.PNG";
+//        Glide.with(this).load(url).into(imageView);
+//        imageView.setVisibility(View.VISIBLE);
+
+//        String json = "[{\"id\":1,\"name\":\"찜닭\",\"category\":\"일식\",\"description\":\"맛난다\",\"restaurant\":\"토끼정\",\"loca_simple\":\"강남\",\"loca_map\":\"강남\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/1/tokkijung.png\"}},\"url\":\"http://52.78.99.238/foods/1.json\"},{\"id\":2,\"name\":\"에그베네딕트\",\"category\":\"양식\",\"description\":\"맛\",\"restaurant\":\"르브런쉭\",\"loca_simple\":\"여의도\",\"loca_map\":\"여의도\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/2/lebrun.PNG\"}},\"url\":\"http://52.78.99.238/foods/2.json\"}]";
+//        List<Food> foodList = Food.getListFromJSonObject(json);
+
+
+        api.getFoods(new Callback<List<Food>>() {
+
+            @Override
+            public void success(List<Food> foods, Response response) {
+                foodList = foods;
+                String imageUrl = foods.get(0).getImage().getImage().getUrl();
+                Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                Toast.makeText(getApplicationContext(), "Failed to load foods", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     @Override
@@ -64,27 +88,15 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.imageButton1:
 //                Glide.with(this).load(R.drawable.tokkijung).into(imageView);
 //                imageView.setVisibility(View.VISIBLE);
-                api.getFoods(new Callback<List<Food>>() {
-                    @Override
-                    public void success(List<Food> thumbnails, Response response) {
 
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-
-                        Toast.makeText(getApplicationContext(), "Failed to load thumbnails", Toast.LENGTH_LONG).show();
-
-                    }
-                });
                 break;
             case R.id.imageButton2:
                 break;
             case R.id.button:
+                Toast.makeText(getApplicationContext(), "imageView", Toast.LENGTH_LONG).show();
                 break;
             case R.id.imageView:
+
                 break;
         }
     }

@@ -21,6 +21,42 @@ public class Food {
     Image image;
     String url;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getRestaurant() {
+        return restaurant;
+    }
+
+    public String getLoca_simple() {
+        return loca_simple;
+    }
+
+    public String getLoca_map() {
+        return loca_map;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
     public static String makeJSon(List<Food> list) {
         String gsonResult = null;
         Gson gson = new Gson();

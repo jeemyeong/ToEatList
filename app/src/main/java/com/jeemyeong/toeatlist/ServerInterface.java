@@ -20,7 +20,7 @@ public interface ServerInterface {
      * @param callback
      */
 
-    @GET("/foods")
+    @GET("/foods.json")
     public void getFoods(Callback<List<Food>> callback);
 
     /**

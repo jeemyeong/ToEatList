@@ -14,6 +14,14 @@ public class Image {
     Image image;
     String url;
 
+    public Image getImage() {
+        return image;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
     public static String makeJSon(List<Image> list) {
         String gsonResult = null;
         Gson gson = new Gson();
