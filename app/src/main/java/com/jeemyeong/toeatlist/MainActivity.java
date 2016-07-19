@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     Button button;
     private ServerInterface api;
     List<Food> foodList;
+    int foodNum = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,34 +64,37 @@ public class MainActivity extends Activity implements View.OnClickListener{
 //        String json = "[{\"id\":1,\"name\":\"찜닭\",\"category\":\"일식\",\"description\":\"맛난다\",\"restaurant\":\"토끼정\",\"loca_simple\":\"강남\",\"loca_map\":\"강남\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/1/tokkijung.png\"}},\"url\":\"http://52.78.99.238/foods/1.json\"},{\"id\":2,\"name\":\"에그베네딕트\",\"category\":\"양식\",\"description\":\"맛\",\"restaurant\":\"르브런쉭\",\"loca_simple\":\"여의도\",\"loca_map\":\"여의도\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/2/lebrun.PNG\"}},\"url\":\"http://52.78.99.238/foods/2.json\"}]";
 //        List<Food> foodList = Food.getListFromJSonObject(json);
 
-
         api.getFoods(new Callback<List<Food>>() {
-
             @Override
             public void success(List<Food> foods, Response response) {
                 foodList = foods;
-                String imageUrl = foods.get(0).getImage().getImage().getUrl();
+                String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
                 Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
             }
-
             @Override
             public void failure(RetrofitError error) {
-
                 Toast.makeText(getApplicationContext(), "Failed to load foods", Toast.LENGTH_LONG).show();
-
             }
         });
+
+
     }
+
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.imageButton1:
-//                Glide.with(this).load(R.drawable.tokkijung).into(imageView);
-//                imageView.setVisibility(View.VISIBLE);
-
+                foodNum++;
+                Glide.with(getApplicationContext())
+                        .load(foodList.get(foodNum).getImage().getImage().getUrl())
+                        .into(imageView);
                 break;
             case R.id.imageButton2:
+                foodNum++;
+                Glide.with(getApplicationContext())
+                        .load(foodList.get(foodNum).getImage().getImage().getUrl())
+                        .into(imageView);
                 break;
             case R.id.button:
                 Toast.makeText(getApplicationContext(), "imageView", Toast.LENGTH_LONG).show();
