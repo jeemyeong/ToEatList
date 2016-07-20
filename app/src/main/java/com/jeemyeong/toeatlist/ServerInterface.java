@@ -32,6 +32,8 @@ public interface ServerInterface {
      * @param callback
      */
 
+
+
 //    @GET("/contents/{article-id}")
 //    public void getContentById(@Path("article-id") long id, Callback<Content> callback);
 //

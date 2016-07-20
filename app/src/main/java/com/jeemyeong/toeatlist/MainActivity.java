@@ -30,6 +30,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private ServerInterface api;
     List<Food> foodList;
     int foodNum = 0;
+    boolean networkState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +44,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //take ServerInterface
         AppController.getInstance().buildServerInterface(ip,port);
         api = AppController.getInstance().getServerInterface();
+        if(api!=null)
+            networkState = true;
 
-
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
 
         imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
         imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
@@ -64,19 +65,21 @@ public class MainActivity extends Activity implements View.OnClickListener{
 //        String json = "[{\"id\":1,\"name\":\"찜닭\",\"category\":\"일식\",\"description\":\"맛난다\",\"restaurant\":\"토끼정\",\"loca_simple\":\"강남\",\"loca_map\":\"강남\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/1/tokkijung.png\"}},\"url\":\"http://52.78.99.238/foods/1.json\"},{\"id\":2,\"name\":\"에그베네딕트\",\"category\":\"양식\",\"description\":\"맛\",\"restaurant\":\"르브런쉭\",\"loca_simple\":\"여의도\",\"loca_map\":\"여의도\",\"image\":{\"image\":{\"url\":\"https://jeemyeongrails.s3.amazonaws.com/uploads/food/image/2/lebrun.PNG\"}},\"url\":\"http://52.78.99.238/foods/2.json\"}]";
 //        List<Food> foodList = Food.getListFromJSonObject(json);
 
-        api.getFoods(new Callback<List<Food>>() {
-            @Override
-            public void success(List<Food> foods, Response response) {
-                foodList = foods;
-                String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
-                Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
-            }
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Failed to load foods", Toast.LENGTH_LONG).show();
-            }
-        });
+        if (networkState) {
+            api.getFoods(new Callback<List<Food>>() {
+                @Override
+                public void success(List<Food> foods, Response response) {
+                    foodList = foods;
+                    String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
+                    Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
+                }
 
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getApplicationContext(), "Failed to load foods", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
     }
 
