@@ -39,7 +39,7 @@
             android:text="Medium Text"
             android:id="@+id/textView4"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp" />
+            android:layout_margin="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,14 +48,14 @@
             android:text="Small Text"
             android:id="@+id/textView5"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp" />
+            android:layout_margin="10dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton2"
             android:layout_gravity="center_horizontal"
-            android:src="@android:drawable/ic_dialog_map"
-            android:layout_margin="5dp" />
+            android:layout_margin="20dp"
+            android:src="@android:drawable/ic_dialog_map" />
     </LinearLayout>
 </RelativeLayout>
