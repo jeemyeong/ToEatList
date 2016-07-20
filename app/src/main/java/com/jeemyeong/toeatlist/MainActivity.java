@@ -12,9 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     ImageButton imageButton1,imageButton2;
     ImageView imageView;
     Button button;
+    TextView textView6, textView7;
     private ServerInterface api;
     List<Food> foodList;
     int foodNum = 0;
@@ -57,6 +61,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
         imageView = (ImageView) findViewById(R.id.imageView);
         button = (Button) findViewById(R.id.button);
+        textView6 = (TextView) findViewById(R.id.textView6);
+        textView7 = (TextView) findViewById(R.id.textView7);
 
         imageButton1.setOnClickListener(this);
         imageButton2.setOnClickListener(this);
@@ -73,6 +79,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     foodList = foods;
                     String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
                     Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
+                    textView6.setText(foodList.get(foodNum).getName());
+                    textView7.setText(foodList.get(foodNum).getRestaurant()+"/"+foodList.get(foodNum).getLoca_simple());
                 }
 
                 @Override
@@ -126,9 +134,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
             else
                 Toast.makeText(getApplicationContext(), "스킵되었습니다.", Toast.LENGTH_LONG).show();
             foodNum++;
-            Glide.with(getApplicationContext())
-                    .load(foodList.get(foodNum).getImage().getImage().getUrl())
-                    .into(imageView);
+            String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
+            Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
+            textView6.setText(foodList.get(foodNum).getName());
+            textView7.setText(foodList.get(foodNum).getRestaurant()+"/"+foodList.get(foodNum).getLoca_simple());
         }
         else
             Toast.makeText(getApplicationContext(), "마지막 음식입니다.", Toast.LENGTH_LONG).show();

@@ -96,8 +96,10 @@ public class Dao {
             url = cursor.getString(9);
             String str = cursor.getString(10);
             bookmark = Boolean.parseBoolean(str);
-            Food foodData = new Food(foodNumber, name, category, description, restaurant, loca_simple, loca_map, image, url, bookmark);
-            localFoodList.add(foodData);
+            if(bookmark){
+                Food foodData = new Food(foodNumber, name, category, description, restaurant, loca_simple, loca_map, image, url, bookmark);
+                localFoodList.add(foodData);
+            }
         }
         return localFoodList;
     }
