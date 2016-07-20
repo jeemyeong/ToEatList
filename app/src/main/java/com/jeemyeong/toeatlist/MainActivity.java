@@ -1,6 +1,7 @@
 package com.jeemyeong.toeatlist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -94,6 +95,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 setNextFood(bookmark);
                 break;
             case R.id.button:
+                Intent intent = new Intent(this, CustomListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.imageView:
                 break;
