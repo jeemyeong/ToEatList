@@ -99,6 +99,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.imageView:
+                Intent intent2= new Intent(this, DetailView.class);
+                intent2.putExtra("foodNumber",foodList.get(foodNum).getId());
+                intent2.putExtra("name", foodList.get(foodNum).getName());
+                intent2.putExtra("category", foodList.get(foodNum).getCategory());
+                intent2.putExtra("description", foodList.get(foodNum).getDescription());
+                intent2.putExtra("restaurant", foodList.get(foodNum).getRestaurant());
+                intent2.putExtra("loca_simple", foodList.get(foodNum).getLoca_simple());
+                intent2.putExtra("loca_map", foodList.get(foodNum).getLoca_map());
+                intent2.putExtra("image", foodList.get(foodNum).getImage().getImage().getUrl());
+                intent2.putExtra("url", foodList.get(foodNum).getUrl());
+                startActivity(intent2);
                 break;
         }
     }

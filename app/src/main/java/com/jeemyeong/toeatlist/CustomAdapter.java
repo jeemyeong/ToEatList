@@ -51,13 +51,11 @@ public class CustomAdapter extends ArrayAdapter<Food>{
 
         Food food = foodList.get(position);
 
-        Glide.with(context)
-                .load(food.getImageUrl())
-                .into(viewHolder.icon);
+        Glide.with(context).load(food.getImageUrl()).into(viewHolder.icon);
 
         viewHolder.item.setText(food.getName());
-        viewHolder.textView1.setText(food.getDescription());
-        viewHolder.textView2.setText(food.getCategory()+"/"+food.getLoca_simple());
+        viewHolder.textView1.setText(food.getCategory());
+        viewHolder.textView2.setText("("+food.getRestaurant()+"/"+food.getLoca_simple()+")");
 
 
         return convertView;
