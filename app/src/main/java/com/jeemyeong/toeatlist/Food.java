@@ -19,7 +19,22 @@ public class Food {
     String loca_simple;
     String loca_map;
     Image image;
+    String imageUrl;
     String url;
+    boolean bookmark;
+
+    public Food(int id, String name, String category, String description, String restaurant, String loca_simple, String loca_map, String imageUrl, String url, boolean bookmark) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.restaurant = restaurant;
+        this.loca_simple = loca_simple;
+        this.loca_map = loca_map;
+        this.imageUrl = imageUrl;
+        this.url = url;
+        this.bookmark = bookmark;
+    }
 
     public int getId() {
         return id;
@@ -55,6 +70,14 @@ public class Food {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public boolean isBookmark() {
+        return bookmark;
     }
 
     public static String makeJSon(List<Food> list) {
