@@ -1,13 +1,15 @@
 package com.jeemyeong.toeatlist;
 
+import com.jeemyeong.toeatlist.Model.Food;
+
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.Headers;
+import retrofit.http.Multipart;
 import retrofit.http.POST;
-import retrofit.http.Path;
+import retrofit.http.Part;
+import retrofit.mime.TypedFile;
 
 /**
  * Created by jeemyeong_id on 2016-07-19.
@@ -32,7 +34,16 @@ public interface ServerInterface {
      * @param callback
      */
 
+    @Multipart
+    @POST("/foods/upload")
+    public void upload(@Part("name")String name,
+                       @Part("category")String category,
+                       @Part("description")String description,
+                       @Part("restaurant")String restaurant,
+                       @Part("loca_simple")String loca_simple,
+                       @Part("image")TypedFile image,
 
+                       Callback<String> callback);
 
 //    @GET("/contents/{article-id}")
 //    public void getContentById(@Path("article-id") long id, Callback<Content> callback);
