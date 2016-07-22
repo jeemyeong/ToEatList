@@ -58,8 +58,6 @@ public class UploadActivity extends Activity implements View.OnClickListener{
         uploadImage.setOnClickListener(this);
         uploadSend.setOnClickListener(this);
 
-//        String lF = Food.makeJSon(foodList);
-//        Log.e("foodListlog",lF);
     }
 
     @Override
@@ -82,10 +80,10 @@ public class UploadActivity extends Activity implements View.OnClickListener{
                     TypedFile uploadFile = new TypedFile("multipart/form-data", new File(filePath));
                     api = AppController.getInstance().getServerInterface();
                     api.upload(uploadName.getText().toString(), uploadCategory.getText().toString(), uploadDescription.getText().toString(),
-                            uploadRestaurant.getText().toString(), uploadLocaSimple.getText().toString(), uploadFile, new Callback<String>() {
+                            uploadRestaurant.getText().toString(), uploadLocaSimple.getText().toString(), uploadFile, new Callback<Object>() {
 
                         @Override
-                        public void success(String s, Response response) {
+                        public void success(Object s, Response response) {
                             progressDialog.cancel();
                             Toast.makeText(getApplicationContext(),"입력되었습니다", Toast.LENGTH_LONG).show();
                             finish();

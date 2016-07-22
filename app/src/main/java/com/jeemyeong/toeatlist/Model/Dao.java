@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jeemyeong on 2016-07-20.
@@ -58,14 +59,18 @@ public class Dao {
             e.printStackTrace();
         }
     }
-    public int size(){
+    public int size(List<Food> foodList){
         int i = 0;
         String sql = "SELECT * FROM LocalFoods;";
         Cursor cursor = database.rawQuery(sql, null);
-        while(cursor.moveToNext()){
-            i++;
+        for(int j = 0; j<foodList.size(); j++){
+            while(cursor.moveToNext()){
+                if(cursor.getString(9) == foodList.get(foodList.size()-1).getUrl())
+                    return j;
+
+            }
         }
-        return i;
+        return 0;
 
     }
     public ArrayList<Food> getLocalFoodList(){

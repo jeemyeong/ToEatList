@@ -43,7 +43,7 @@ public interface ServerInterface {
                        @Part("loca_simple")String loca_simple,
                        @Part("image")TypedFile image,
 
-                       Callback<String> callback);
+                       Callback<Object> callback);
 
 //    @GET("/contents/{article-id}")
 //    public void getContentById(@Path("article-id") long id, Callback<Content> callback);

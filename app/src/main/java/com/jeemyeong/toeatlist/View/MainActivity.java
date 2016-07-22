@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         button.setOnClickListener(this);
 
         dao = new Dao(getApplicationContext());
-        foodNum = dao.size();
+        foodNum = dao.size(foodList);
         refreshData();
     }
 

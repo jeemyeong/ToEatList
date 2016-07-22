@@ -27,17 +27,19 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".View.DetailView"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <!--
-     ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
+            android:theme="@android:style/Theme.NoTitleBar">
+            <data android:scheme="@string/kakao_scheme" android:host="@string/kakaolink_host" />
+
+        </activity>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".View.UploadActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
+
     </application>
 
 </manifest>
