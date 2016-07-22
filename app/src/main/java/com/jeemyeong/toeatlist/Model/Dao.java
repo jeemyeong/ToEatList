@@ -67,7 +67,6 @@ public class Dao {
             cursor = database.rawQuery(sql, null);
             while(cursor.moveToNext()){
                 if(cursor.getString(9).toString().equals(foodList.get(foodList.size()-1-j).getUrl().toString())){
-                    Log.i("Find", Integer.toString(foodList.size()-1-j));
                     return foodList.size()-1-j;
                 }
             }

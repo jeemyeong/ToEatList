@@ -18,6 +18,7 @@ import com.jeemyeong.toeatlist.R;
 import com.jeemyeong.toeatlist.ServerInterface;
 import com.jeemyeong.toeatlist.View.CustomListActivity;
 import com.jeemyeong.toeatlist.View.DetailView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends Activity implements View.OnClickListener{
     ImageButton imageButton1,imageButton2;
-    ImageView imageView;
-    Button button;
+    CircularImageView imageView;
+    ImageButton button;
     TextView textView6, textView7;
     private ServerInterface api;
     List<Food> foodList;
@@ -58,8 +59,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
         imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
-        imageView = (ImageView) findViewById(R.id.imageView);
-        button = (Button) findViewById(R.id.button);
+        imageView = (CircularImageView) findViewById(R.id.imageView);
+        button = (ImageButton) findViewById(R.id.button);
         textView6 = (TextView) findViewById(R.id.textView6);
         textView7 = (TextView) findViewById(R.id.textView7);
 

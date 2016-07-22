@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.appindexing.Action;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class CustomListActivity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
     Dao dao;
     ArrayList<Food> foodLocalList;
-    Button addButton;
+    ImageButton addButton;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -35,7 +36,7 @@ public class CustomListActivity extends Activity implements AdapterView.OnItemCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_list);
 
-        addButton = (Button) findViewById(R.id.add_button);
+        addButton = (ImageButton) findViewById(R.id.add_button);
 
         dao = new Dao(getApplicationContext());
         foodLocalList = dao.getLocalFoodList();

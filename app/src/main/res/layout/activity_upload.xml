@@ -8,14 +8,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".View.UploadActivity"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:id="@+id/upload_image"
-        android:src="@android:drawable/ic_menu_gallery"
-        android:layout_gravity="center_horizontal" />
+        android:src="@drawable/upload"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/background"
+        android:padding="2dp"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -49,9 +52,10 @@
         android:text="Location" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/upload_send"
         android:layout_gravity="center_horizontal"
-        android:src="@android:drawable/ic_menu_send" />
+        android:src="@drawable/send"
+        android:background="@color/background" />
 </LinearLayout>

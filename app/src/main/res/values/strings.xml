@@ -4,4 +4,5 @@
     <string name="kakao_app_key">522def3f8312763d0c4efdcdf0f1b645</string>
     <string name="kakao_scheme">kakao522def3f8312763d0c4efdcdf0f1b645</string>
     <string name="kakaolink_host">kakaolink</string>
+
 </resources>

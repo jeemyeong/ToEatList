@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.jeemyeong.toeatlist.Model.Food;
 import com.jeemyeong.toeatlist.R;
 import com.jeemyeong.toeatlist.View.ViewHolder;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class CustomAdapter extends ArrayAdapter<Food>{
 
             viewHolder = new ViewHolder();
 
-            viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
+            viewHolder.icon = (CircularImageView) convertView.findViewById(R.id.icon);
             viewHolder.item = (TextView) convertView.findViewById(R.id.item);
             viewHolder.textView1 = (TextView) convertView.findViewById(R.id.textView1);
             viewHolder.textView2 = (TextView) convertView.findViewById(R.id.textView2);

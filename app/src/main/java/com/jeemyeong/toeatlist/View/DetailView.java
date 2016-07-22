@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jeemyeong.toeatlist.R;
@@ -25,7 +21,7 @@ import com.kakao.KakaoTalkLinkMessageBuilder;
 public class DetailView extends Activity {
     ImageView imageView2;
     TextView textView3, textView4, textView5;
-    ImageButton imageButton2, kakaoSend;
+    ImageButton naverMap, kakaoSend;
     private KakaoLink kakaoLink;
     private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
 
@@ -38,7 +34,7 @@ public class DetailView extends Activity {
         textView3 = (TextView) findViewById(R.id.textView3);
         textView4 = (TextView) findViewById(R.id.textView4);
         textView5 = (TextView) findViewById(R.id.textView5);
-        imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
+        naverMap = (ImageButton) findViewById(R.id.naver_map);
         kakaoSend = (ImageButton) findViewById(R.id.kakao_send);
 
         int id = getIntent().getExtras().getInt("foodNumber");
@@ -51,9 +47,9 @@ public class DetailView extends Activity {
         String imageUrl = getIntent().getExtras().getString("image");
 
         if (loca_map == null)
-            imageButton2.setVisibility(View.INVISIBLE);
+            naverMap.setVisibility(View.INVISIBLE);
         else if (!loca_map.startsWith("http://") && !loca_map.startsWith("https://"))
-            imageButton2.setVisibility(View.INVISIBLE);
+            naverMap.setVisibility(View.INVISIBLE);
 
         Glide.with(getApplicationContext()).load(imageUrl).into(imageView2);
         textView3.setText(name);
@@ -71,7 +67,7 @@ public class DetailView extends Activity {
         } catch (KakaoParameterException e) {
             alert(e.getMessage());
         }
-        imageButton2.setOnClickListener(new View.OnClickListener() {
+        naverMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(loca_map));
