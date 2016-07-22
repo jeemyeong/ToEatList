@@ -21,7 +21,7 @@
             android:id="@+id/add_button"
             android:layout_gravity="right"
             android:background="@color/background"
-            android:src="@drawable/abc_ic_menu_share_mtrl_alpha" />
+            android:src="@mipmap/upload" />
 
         <ListView
             android:layout_width="match_parent"
