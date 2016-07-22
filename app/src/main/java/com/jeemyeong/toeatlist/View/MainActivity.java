@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     TextView textView6, textView7;
     private ServerInterface api;
     List<Food> foodList;
-    int foodNum;
+    int foodNum = 0;
     boolean networkState = false;
     Dao dao;
     boolean bookmark;
@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         button.setOnClickListener(this);
 
         dao = new Dao(getApplicationContext());
-        foodNum = dao.size(foodList);
+
         refreshData();
     }
 
@@ -133,6 +133,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 @Override
                 public void success(List<Food> foods, Response response) {
                     foodList = foods;
+                    foodNum = dao.size(foodList)+1;
                     String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
                     Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
                     textView6.setText(foodList.get(foodNum).getName());

@@ -62,12 +62,14 @@ public class Dao {
     public int size(List<Food> foodList){
         int i = 0;
         String sql = "SELECT * FROM LocalFoods;";
-        Cursor cursor = database.rawQuery(sql, null);
+        Cursor cursor;
         for(int j = 0; j<foodList.size(); j++){
+            cursor = database.rawQuery(sql, null);
             while(cursor.moveToNext()){
-                if(cursor.getString(9) == foodList.get(foodList.size()-1).getUrl())
-                    return j;
-
+                if(cursor.getString(9).toString().equals(foodList.get(foodList.size()-1-j).getUrl().toString())){
+                    Log.i("Find", Integer.toString(foodList.size()-1-j));
+                    return foodList.size()-1-j;
+                }
             }
         }
         return 0;
