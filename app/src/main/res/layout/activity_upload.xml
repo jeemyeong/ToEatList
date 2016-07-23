@@ -14,7 +14,7 @@
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/upload_image"
+        android:id="@+id/upload_image_imageButton"
         android:src="@drawable/upload"
         android:layout_gravity="center_horizontal"
         android:background="@color/background"
@@ -23,38 +23,38 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upload_name"
-        android:text="Food Name" />
+        android:id="@+id/upload_name_editText"
+        android:hint="Food Name(ex:스시)" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upload_category"
-        android:text="Category"
+        android:id="@+id/upload_category_editText"
+        android:hint="Category(ex:일식)"
         android:layout_gravity="right" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upload_description"
-        android:text="Description" />
+        android:id="@+id/upload_description_editText"
+        android:hint="Description(ex:정말정말 맛있다.)" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upload_restaurant"
-        android:text="Restaurant" />
+        android:id="@+id/upload_restaurant_editText"
+        android:hint="Restaurant(ex:스시XX)" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upload_loca"
-        android:text="Location" />
+        android:id="@+id/upload_loca_simple_editText"
+        android:hint="Location(ex:강남)" />
 
     <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/upload_send"
+        android:id="@+id/upload_send_imageButton"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/send"
         android:background="@color/background" />

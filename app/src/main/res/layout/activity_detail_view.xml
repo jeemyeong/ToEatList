@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="240dp"
             android:layout_height="240dp"
-            android:id="@+id/imageView2"
+            android:id="@+id/detail_food_image_imageView"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="#FFFFFF"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/textView3"
+            android:id="@+id/detail_food_name_textView"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/textView4"
+            android:id="@+id/detail_food_restaurant_loca_simple_textView"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/textView5"
+            android:id="@+id/detail_food_description_textView"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp" />
 
@@ -63,7 +63,7 @@
             <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/naver_map"
+                android:id="@+id/naver_map_web_imageButton"
                 android:src="@mipmap/naver_map"
                 android:background="@color/background"
                 android:layout_margin="5dp" />
@@ -71,7 +71,7 @@
             <ImageButton
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/kakao_send"
+                android:id="@+id/kakao_link_app_imageButton"
                 android:layout_margin="10dp"
                 android:src="@drawable/kakaotalk_icon"
                 android:cropToPadding="false"

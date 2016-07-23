@@ -16,7 +16,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/main_food_list_imageButton"
         android:layout_gravity="right"
         android:background="@color/background"
         android:src="@mipmap/mylist" />
@@ -25,7 +25,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@android:drawable/ic_menu_gallery"
-        android:id="@+id/imageView"
+        android:id="@+id/main_food_image_circularImageView"
         android:background="@color/background"
         app:civ_border_color="#EEEEEE"
         app:civ_border_width="2dp"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textView6"
+        android:id="@+id/main_food_title_textView"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textView7"
+        android:id="@+id/main_food_detail_textView"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp" />
 
@@ -62,13 +62,13 @@
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/imageButton1"
+            android:id="@+id/main_food_heart_imageView"
             android:src="@drawable/pic_heart" />
 
         <ImageView
             android:layout_width="2dp"
             android:layout_height="100dp"
-            android:id="@+id/imageView3"
+            android:id="@+id/main_food_devideBar_imageView"
             android:src="@color/com_kakao_account_button_background"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp" />
@@ -76,7 +76,7 @@
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/imageButton2"
+            android:id="@+id/main_food_trash_imageView"
             android:src="@drawable/pic_trashcan" />
 
     </LinearLayout>

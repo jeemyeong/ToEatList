@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +14,8 @@ import com.jeemyeong.toeatlist.Model.Dao;
 import com.jeemyeong.toeatlist.Model.Food;
 import com.jeemyeong.toeatlist.R;
 import com.jeemyeong.toeatlist.ServerInterface;
-import com.jeemyeong.toeatlist.View.CustomListActivity;
-import com.jeemyeong.toeatlist.View.DetailView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -29,16 +24,15 @@ import retrofit.client.Response;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
-    ImageButton imageButton1,imageButton2;
-    CircularImageView imageView;
-    ImageButton button;
-    TextView textView6, textView7;
+    private ImageButton main_food_heart_imageView, main_food_trash_imageView, my_list_imageButton;
+    private CircularImageView main_food_image_circularImageView;
+    private TextView main_food_title_textView, main_food_detail_textView;
+    private Dao dao;
     private ServerInterface api;
-    List<Food> foodList;
-    int foodNum = 0;
-    boolean networkState = false;
-    Dao dao;
-    boolean bookmark;
+    private List<Food> foodList;
+    private int foodNum = 0;
+    private boolean networkState = false;
+    private boolean bookmark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,39 +51,43 @@ public class MainActivity extends Activity implements View.OnClickListener{
         else
             Toast.makeText(getApplicationContext(),"서버에 문제가 생겼습니다.",Toast.LENGTH_SHORT).show();
 
-        imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
-        imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
-        imageView = (CircularImageView) findViewById(R.id.imageView);
-        button = (ImageButton) findViewById(R.id.button);
-        textView6 = (TextView) findViewById(R.id.textView6);
-        textView7 = (TextView) findViewById(R.id.textView7);
+        //get button & image view
+        main_food_heart_imageView = (ImageButton) findViewById(R.id.main_food_heart_imageView);
+        main_food_trash_imageView = (ImageButton) findViewById(R.id.main_food_trash_imageView);
+        my_list_imageButton = (ImageButton) findViewById(R.id.main_food_list_imageButton);
+        main_food_image_circularImageView = (CircularImageView) findViewById(R.id.main_food_image_circularImageView);
+        main_food_title_textView = (TextView) findViewById(R.id.main_food_title_textView);
+        main_food_detail_textView = (TextView) findViewById(R.id.main_food_detail_textView);
 
-        imageButton1.setOnClickListener(this);
-        imageButton2.setOnClickListener(this);
-        imageView.setOnClickListener(this);
-        button.setOnClickListener(this);
+        //set Listener
+        main_food_heart_imageView.setOnClickListener(this);
+        main_food_trash_imageView.setOnClickListener(this);
+        main_food_image_circularImageView.setOnClickListener(this);
+        my_list_imageButton.setOnClickListener(this);
 
+        //get DAO(Data Access Object)
         dao = new Dao(getApplicationContext());
 
+        //refresh data by online
         refreshData();
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.imageButton1:
+            case R.id.main_food_heart_imageView: //Click heart, then bookmark
                 bookmark = true;
                 setNextFood(bookmark);
                 break;
-            case R.id.imageButton2:
+            case R.id.main_food_trash_imageView: //Click trash, then not bookmark
                 bookmark = false;
                 setNextFood(bookmark);
                 break;
-            case R.id.button:
+            case R.id.main_food_list_imageButton: //go to food list
                 Intent intent = new Intent(this, CustomListActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.imageView:
+            case R.id.main_food_image_circularImageView: //go to food detail view
                 Intent intent2= new Intent(this, DetailView.class);
                 intent2.putExtra("foodNumber",foodList.get(foodNum).getId());
                 intent2.putExtra("name", foodList.get(foodNum).getName());
@@ -111,7 +109,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         refreshData();
     }
 
-    void setNextFood(boolean bookmark){
+    void setNextFood(boolean bookmark){ //set next food when click heart or trash
         if(foodNum<foodList.size()-1) {
             dao.insertFoodData(foodList.get(foodNum), bookmark);
             if(bookmark)
@@ -120,25 +118,25 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 Toast.makeText(getApplicationContext(), "스킵되었습니다.", Toast.LENGTH_LONG).show();
             foodNum++;
             String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
-            Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
-            textView6.setText(foodList.get(foodNum).getName());
-            textView7.setText(foodList.get(foodNum).getRestaurant()+"/"+foodList.get(foodNum).getLoca_simple());
+            Glide.with(getApplicationContext()).load(imageUrl).into(main_food_image_circularImageView);
+            main_food_title_textView.setText(foodList.get(foodNum).getName());
+            main_food_detail_textView.setText(foodList.get(foodNum).getRestaurant()+"/"+foodList.get(foodNum).getLoca_simple());
         }
         else
             Toast.makeText(getApplicationContext(), "마지막 음식입니다.", Toast.LENGTH_LONG).show();
     }
 
-    void refreshData() {
+    void refreshData() { //refresh data if network has been working
         if (networkState) {
             api.getFoods(new Callback<List<Food>>() {
                 @Override
                 public void success(List<Food> foods, Response response) {
                     foodList = foods;
-                    foodNum = dao.size(foodList)+1;
+                    foodNum = dao.getLastFoodIndex(foodList)+1;
                     String imageUrl = foodList.get(foodNum).getImage().getImage().getUrl();
-                    Glide.with(getApplicationContext()).load(imageUrl).into(imageView);
-                    textView6.setText(foodList.get(foodNum).getName());
-                    textView7.setText(foodList.get(foodNum).getRestaurant() + "/" + foodList.get(foodNum).getLoca_simple());
+                    Glide.with(getApplicationContext()).load(imageUrl).into(main_food_image_circularImageView);
+                    main_food_title_textView.setText(foodList.get(foodNum).getName());
+                    main_food_detail_textView.setText(foodList.get(foodNum).getRestaurant() + "/" + foodList.get(foodNum).getLoca_simple());
                 }
 
                 @Override

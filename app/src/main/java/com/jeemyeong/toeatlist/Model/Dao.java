@@ -17,9 +17,10 @@ public class Dao {
     public Dao(Context context){
         this.context = context;
 
+        //database "LocalDATA.db"
         database = context.openOrCreateDatabase("LocalDATA.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
 
-
+        //CREATE TABLE("LocalFoods") IF NOT EXISTS on database
         try{
             String sql = "CREATE TABLE IF NOT EXISTS LocalFoods (ID integer primary key autoincrement,"
                     + "                                        FoodNumber integer UNIQUE not null,"
@@ -39,7 +40,7 @@ public class Dao {
         }
     }
 
-
+    //Insert Food Data to LocalDATA.db
     public void insertFoodData(Food foodData, boolean bookmark){
         int foodNumber = foodData.getId();
         String name = foodData.getName();
@@ -59,10 +60,12 @@ public class Dao {
             e.printStackTrace();
         }
     }
-    public int size(List<Food> foodList){
+
+    public int getLastFoodIndex(List<Food> foodList){
         int i = 0;
         String sql = "SELECT * FROM LocalFoods;";
         Cursor cursor;
+        //Looping twice to get last food index
         for(int j = 0; j<foodList.size(); j++){
             cursor = database.rawQuery(sql, null);
             while(cursor.moveToNext()){
@@ -92,6 +95,7 @@ public class Dao {
         String sql = "SELECT * FROM LocalFoods;";
         Cursor cursor = database.rawQuery(sql, null);
 
+        //Looping to return local food list
         while(cursor.moveToNext()){
             foodNumber = cursor.getInt(1);
             name = cursor.getString(2);

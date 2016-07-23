@@ -29,13 +29,13 @@ import retrofit.mime.TypedFile;
 
 public class UploadActivity extends Activity implements View.OnClickListener{
 
-    ImageButton uploadImage;
-    ImageButton uploadSend;
-    EditText uploadName;
-    EditText uploadCategory;
-    EditText uploadDescription;
-    EditText uploadRestaurant;
-    EditText uploadLocaSimple;
+    private ImageButton upload_image_imageButton;
+    private ImageButton upload_send_imageButton;
+    private EditText upload_name_editText;
+    private EditText upload_category_editText;
+    private EditText upload_description_editText;
+    private EditText upload_restaurant_editText;
+    private EditText upload_loca_simple_editText;
     private ServerInterface api;
     private static final int REQUEST_PHOTO_ALBOM = 1;
     private String filePath;
@@ -47,40 +47,42 @@ public class UploadActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
-        uploadImage = (ImageButton) findViewById(R.id.upload_image);
-        uploadSend = (ImageButton) findViewById(R.id.upload_send);
-        uploadName = (EditText) findViewById(R.id.upload_name);
-        uploadCategory = (EditText) findViewById(R.id.upload_category);
-        uploadDescription = (EditText) findViewById(R.id.upload_description);
-        uploadRestaurant = (EditText) findViewById(R.id.upload_restaurant);
-        uploadLocaSimple = (EditText) findViewById(R.id.upload_loca);
+        upload_image_imageButton = (ImageButton) findViewById(R.id.upload_image_imageButton);
+        upload_send_imageButton = (ImageButton) findViewById(R.id.upload_send_imageButton);
+        upload_name_editText = (EditText) findViewById(R.id.upload_name_editText);
+        upload_category_editText = (EditText) findViewById(R.id.upload_category_editText);
+        upload_description_editText = (EditText) findViewById(R.id.upload_description_editText);
+        upload_restaurant_editText = (EditText) findViewById(R.id.upload_restaurant_editText);
+        upload_loca_simple_editText = (EditText) findViewById(R.id.upload_loca_simple_editText);
 
-        uploadImage.setOnClickListener(this);
-        uploadSend.setOnClickListener(this);
+        upload_image_imageButton.setOnClickListener(this);
+        upload_send_imageButton.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.upload_image:
+            case R.id.upload_image_imageButton: // to upload image
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, REQUEST_PHOTO_ALBOM);
                 break;
-            case R.id.upload_send:
-                if(filePath == null || uploadName.getText().toString().length() == 0 || uploadRestaurant.getText().toString().length() == 0)
+            case R.id.upload_send_imageButton: //send data to server
+                //when some data is null
+                if(filePath == null || upload_name_editText.getText().toString().length() == 0 || upload_restaurant_editText.getText().toString().length() == 0)
                     Toast.makeText(getApplicationContext(),"모두 채워주세요", Toast.LENGTH_LONG).show();
-                else{
+                else{ //not null
+                    //when uploading, dialog  is working
                     final Handler handler = new Handler();
                     final ProgressDialog progressDialog = ProgressDialog.show(this, "", "업로드 중 입니다.");
 
-
+                    //send data to server
                     TypedFile uploadFile = new TypedFile("multipart/form-data", new File(filePath));
                     api = AppController.getInstance().getServerInterface();
-                    api.upload(uploadName.getText().toString(), uploadCategory.getText().toString(), uploadDescription.getText().toString(),
-                            uploadRestaurant.getText().toString(), uploadLocaSimple.getText().toString(), uploadFile, new Callback<Object>() {
+                    api.upload(upload_name_editText.getText().toString(), upload_category_editText.getText().toString(), upload_description_editText.getText().toString(),
+                            upload_restaurant_editText.getText().toString(), upload_loca_simple_editText.getText().toString(), uploadFile, new Callback<Object>() {
 
                         @Override
                         public void success(Object s, Response response) {
@@ -101,10 +103,11 @@ public class UploadActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    @Override
+    @Override //user should bring photo from gallery
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //get file path & set image
         try{
             if(requestCode == REQUEST_PHOTO_ALBOM){
                 Uri uri = getRealPathUri(data.getData());
@@ -112,13 +115,14 @@ public class UploadActivity extends Activity implements View.OnClickListener{
                 fileName = uri.getLastPathSegment();
 
                 Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                uploadImage.setImageBitmap(bitmap);
+                upload_image_imageButton.setImageBitmap(bitmap);
             }
         }catch(Exception e){
             Log.e("Upload","onActivityResult ERROR:" + e);
         }
     }
 
+    //method to get real path
     private Uri getRealPathUri(Uri uri){
         Uri filePathUri = uri;
         if (uri.getScheme().toString().compareTo("content") == 0){

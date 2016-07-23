@@ -22,11 +22,8 @@ public class AppController extends Application {
     public ServerInterface getServerInterface() {return  api;}
 
     public void onCreate(){
-
         super.onCreate();
         AppController.instance = this;
-
-
     }
 
 
@@ -40,14 +37,11 @@ public class AppController extends Application {
             //목적지 주소 즉, 서버의 주소를 설정
             endpoint = String.format("http://%s:%d",ip,port);
 
-            //GSON에 날짜 포맷을 설정하고 Converter에 객체를 넣어줍니다.
+            //set data format for GSON & insert object to Converter
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
-
             RestAdapter.Builder builder = new RestAdapter.Builder();
             builder.setConverter(new GsonConverter(gson));
-
             builder.setEndpoint(endpoint);
-
             builder.setRequestInterceptor(new RequestInterceptor() {
                 @Override
                 public void intercept(RequestFacade request) {
@@ -59,11 +53,5 @@ public class AppController extends Application {
             api = adapter.create(ServerInterface.class);
 
         }
-
-
-
     }
-
-
-
 }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,12 +19,12 @@ import java.util.ArrayList;
 /**
  * Created by jeemyeong on 2016-07-20.
  */
-public class CustomAdapter extends ArrayAdapter<Food>{
+public class FoodListAdapter extends ArrayAdapter<Food>{
     private Context context;
     private int layoutResourceId;
     private ArrayList<Food> foodList;
 
-    public CustomAdapter(Context context, int layoutResourceId, ArrayList<Food> foodList) {
+    public FoodListAdapter(Context context, int layoutResourceId, ArrayList<Food> foodList) {
         super(context, layoutResourceId, foodList);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
@@ -35,7 +34,6 @@ public class CustomAdapter extends ArrayAdapter<Food>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
         ViewHolder viewHolder;
 
         if (convertView == null) {
@@ -44,10 +42,10 @@ public class CustomAdapter extends ArrayAdapter<Food>{
 
             viewHolder = new ViewHolder();
 
-            viewHolder.icon = (CircularImageView) convertView.findViewById(R.id.icon);
-            viewHolder.item = (TextView) convertView.findViewById(R.id.item);
-            viewHolder.textView1 = (TextView) convertView.findViewById(R.id.textView1);
-            viewHolder.textView2 = (TextView) convertView.findViewById(R.id.textView2);
+            viewHolder.setIcon((CircularImageView) convertView.findViewById(R.id.food_list_thumbnail_circularImageView));
+            viewHolder.setItem((TextView) convertView.findViewById(R.id.food_list_name_textView));
+            viewHolder.setCategory((TextView) convertView.findViewById(R.id.food_list_category_textView));
+            viewHolder.setDetail((TextView) convertView.findViewById(R.id.food_list_detail_textView));
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -55,11 +53,13 @@ public class CustomAdapter extends ArrayAdapter<Food>{
 
         Food food = foodList.get(position);
 
-        Glide.with(context).load(food.getImageUrl()).into(viewHolder.icon);
+        //set food icon
+        Glide.with(context).load(food.getImageUrl()).into(viewHolder.getIcon());
 
-        viewHolder.item.setText(food.getName());
-        viewHolder.textView1.setText(food.getCategory());
-        viewHolder.textView2.setText("("+food.getRestaurant()+"/"+food.getLoca_simple()+")");
+        //set text about food
+        viewHolder.getItem().setText(food.getName());
+        viewHolder.getCategory().setText(food.getCategory());
+        viewHolder.getDetail().setText("("+food.getRestaurant()+"/"+food.getLoca_simple()+")");
 
 
         return convertView;

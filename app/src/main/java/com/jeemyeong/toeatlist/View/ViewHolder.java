@@ -1,6 +1,5 @@
 package com.jeemyeong.toeatlist.View;
 
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -10,9 +9,50 @@ import com.mikhaellopez.circularimageview.CircularImageView;
  */
 public class ViewHolder {
 
-    public CircularImageView icon;
-    public TextView item;
-    public TextView textView1;
-    public TextView textView2;
+    private  CircularImageView icon;
+    private  TextView item;
+    private  TextView category;
+    private  TextView detail;
 
+    public ViewHolder() {
+    }
+
+    public ViewHolder(CircularImageView icon, TextView item, TextView category, TextView detail) {
+        this.icon = icon;
+        this.item = item;
+        this.category = category;
+        this.detail = detail;
+    }
+
+    public CircularImageView getIcon() {
+        return icon;
+    }
+
+    public TextView getItem() {
+        return item;
+    }
+
+    public TextView getCategory() {
+        return category;
+    }
+
+    public TextView getDetail() {
+        return detail;
+    }
+
+    public void setIcon(CircularImageView icon) {
+        this.icon = icon;
+    }
+
+    public void setItem(TextView item) {
+        this.item = item;
+    }
+
+    public void setCategory(TextView category) {
+        this.category = category;
+    }
+
+    public void setDetail(TextView detail) {
+        this.detail = detail;
+    }
 }

@@ -6,14 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.jeemyeong.toeatlist.Controller.CustomAdapter;
+import com.jeemyeong.toeatlist.Controller.FoodListAdapter;
 import com.jeemyeong.toeatlist.Model.Dao;
 import com.jeemyeong.toeatlist.Model.Food;
 import com.jeemyeong.toeatlist.R;
@@ -21,9 +20,9 @@ import com.jeemyeong.toeatlist.R;
 import java.util.ArrayList;
 
 public class CustomListActivity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
-    Dao dao;
-    ArrayList<Food> foodLocalList;
-    ImageButton addButton;
+    private Dao dao;
+    private ArrayList<Food> foodLocalList;
+    private ImageButton food_list_add_imageButton;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -34,19 +33,24 @@ public class CustomListActivity extends Activity implements AdapterView.OnItemCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_list);
+        setContentView(R.layout.activity_food_list);
 
-        addButton = (ImageButton) findViewById(R.id.add_button);
+        //get button & list view
+        food_list_add_imageButton = (ImageButton) findViewById(R.id.food_list_add_imageButton);
+        ListView food_list_listView = (ListView) findViewById(R.id.food_list_listView);
 
+        //get DAO(Data Access Object)
         dao = new Dao(getApplicationContext());
+        //get Local Data
         foodLocalList = dao.getLocalFoodList();
 
-        ListView listView = (ListView) findViewById(R.id.custom_list_listView);
-        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, foodLocalList);
-        listView.setAdapter(customAdapter);
+        //set adapter for list view
+        FoodListAdapter foodListAdapter = new FoodListAdapter(this, R.layout.list_row, foodLocalList);
+        food_list_listView.setAdapter(foodListAdapter);
 
-        addButton.setOnClickListener(this);
-        listView.setOnItemClickListener(this);
+        //add listener
+        food_list_add_imageButton.setOnClickListener(this);
+        food_list_listView.setOnItemClickListener(this);
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
@@ -54,7 +58,7 @@ public class CustomListActivity extends Activity implements AdapterView.OnItemCl
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.add_button:
+            case R.id.food_list_add_imageButton: //food add button
                 Intent intent= new Intent(this, UploadActivity.class);
                 startActivity(intent);
                 break;
@@ -62,6 +66,7 @@ public class CustomListActivity extends Activity implements AdapterView.OnItemCl
 
     }
 
+    //when clicking item, go to detail view
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent= new Intent(this, DetailView.class);
