@@ -75,3 +75,12 @@
  * Retrofit Interface : https://github.com/jeemyeong/ToEatList/blob/master/app/src/main/java/com/jeemyeong/toeatlist/ServerInterface.java 
  
  * Layout: https://github.com/jeemyeong/ToEatList/tree/master/app/src/main/res/layout
+
+#Screenshot
+
+![alt tag](https://lh3.googleusercontent.com/cRzgwrwZCGQDaoVlLxMizVslrNZ63_iRH5twpPwArnI6ZDL3W4nrrU13DbF2enJm9xE=h900-rw)
+![alt tag](https://lh3.googleusercontent.com/ES2j1-umDJcQENpSXmFPVf_DwWw9VwZxJLEA96gGF_Rova79PC5nIcT5sPt2W6GTn8Y=h900-rw)
+![alt tag](https://lh3.googleusercontent.com/M1c73X2Q6Hgt4kiQUDooQa4zejme8wQi94wSfPJgVG83MlP5XKCZwF7Nmcs3nrp3Du8d=h900-rw)
+![alt tag](https://lh3.googleusercontent.com/PwPhHM0vd0xahS_YK-qRPr7oxPXHczvK7S6c6d8LyjcqPWx9E0tviQtW2zvMoUXWUA=h900-rw)
+![alt tag](https://lh3.googleusercontent.com/NUtzJ6EavJJbPAgdHfLjaTnSdcXRufga8TGTgdX2VWw6uIny0_n4EwDzqcHLbJq6bnkW=h900-rw)
+![alt tag](https://lh3.googleusercontent.com/b35mNn2b8sXwKhnxOrGr9sDHGIJWyubQKFzhx1cLgkDOckc3AhPkWt745qVY6Nw8_g=h900-rw)
